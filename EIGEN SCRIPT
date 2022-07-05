@@ -1,0 +1,114 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("OmniHub", "DarkTheme")
+
+
+--MAIN
+local Tab = Window:NewTab("Main")
+local MainSection = Tab:NewSection("Main")
+
+
+
+MainSection:NewKeybind("Toggle Ui button", "Rightalt to toggle ui u can also change it", Enum.KeyCode.RightAlt, function()
+	Library:ToggleUI()
+end)
+--player tab and section
+local Tab = Window:NewTab("Player")
+local PlayerSection = Tab:NewSection("Player scripts")
+
+--player section walkspeed slider
+PlayerSection:NewSlider("Walkspeed", "the speed", 500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+
+--player section jumppower slider
+PlayerSection:NewSlider("JumpPower", "Jumppower", 250, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+end)
+
+--player button reset walkspeed and jumppower
+PlayerSection:NewButton("Reset WS/JP", "resets walkspeed and jumppower", function()
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+	game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+end)
+
+--tab and section cbro
+local Tab = Window:NewTab("CBRO")
+local CBROSection = Tab:NewSection("CBRO scripts")
+
+--cbro button for script loader
+CBROSection:NewButton("CB:RO script loader", "CB:RO script loader", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Danixik/LoaderV3/main/Main.lua", true))()
+end)
+--gpo tab and section
+local Tab = Window:NewTab("GPO")
+local GPOSection = Tab:NewSection("GPO scripts")
+
+
+--gpo scripts dropdown
+GPOSection:NewDropdown("GPO scripts", "GPO scripts", {"CFA", "DF", "GhostPiece"}, function(currentOption)
+if currentOption == "CFA" then
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/CFA-HUB/CFA-HUB/main/cfahubfree.lua"))()
+elseif currentOption == "DF" then
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/ArponAG/Scripts/main/gpo.lua', true))()
+elseif currentOption == "GhostPiece" then
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/ghost-home/public/main/GhostPiece.lua',true))()
+end
+end)
+
+--dahood tab and section
+local Tab = Window:NewTab("Da Hood")
+local DaHoodSection = Tab:NewSection("Da Hood scripts")
+
+--dahood scripts dropdown
+DaHoodSection:NewDropdown("Da Hood scripts", "Da Hood scripts", {"Faded silent aim", "Rayx"}, function(currentOption)
+if currentOption == "Faded silent aim" then
+_G.HideToggle = P -- You can put any keybind
+loadstring(game:HttpGet("https://raw.githubusercontent.com/NighterEpic/FadedLock/main/YesEpic"))()
+elseif currentOption == "Rayx" then
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/SpaceYes/Lua/Main/DaHood.Lua'))()
+end
+end)
+
+--universal tab and section
+local Tab = Window:NewTab("Universal")
+local UniversalSection = Tab:NewSection("Universal scripts")
+--button to activate infinite yield
+UniversalSection:NewButton("Infinite Yield", "FE admin commands", function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+--universal aimbot scripts dropdown
+UniversalSection:NewDropdown("Universal aimbot ", "universal aimbot scripts", {"blissful aimbot script", "Exunys aimbot script"}, function(currentOption)
+if currentOption == "blissful aimbot script"then
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Blissful4992/Miscellaneous/main/UNIVERSAL.lua"))()
+elseif currentOption == "Exunys aimbot script" then
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Aimbot-V2/main/Resources/Scripts/Main.lua"))()
+end
+end)
+
+--button to activate luna esp
+UniversalSection:NewButton("ESP", "Esp", function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/ic3w0lf22/Unnamed-ESP/master/UnnamedESP.lua',true))()
+end)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
