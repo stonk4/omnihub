@@ -23,3 +23,7 @@ Universal aimbot : loadstring(game:HttpGet("https://raw.githubusercontent.com/Ex
 Universal ESP : loadstring(game:HttpGet('https://raw.githubusercontent.com/ic3w0lf22/Unnamed-ESP/master/UnnamedESP.lua',true))()
 
 I may be adding more games but this scripthub was made for games i like and actually for personal use but im sharing it on GitHub for you guys to use if you want.
+
+The script : loadstring(game:HttpGet('https://pastebin.com/raw/0WB4PSQR'))() 
+
+You can use the script or download OmniHub.lua and into your executer or you can paste all the raw script into your executer
