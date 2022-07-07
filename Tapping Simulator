@@ -1,0 +1,158 @@
+--Library kavo ui from xHeptc(Hot)
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+--name and theme of my ui + creation of my ui
+local Window = Library.CreateLib("OmniHub - Tapping Simulator", "GrapeTheme")
+
+--getgenv().  is better then _G.
+getgenv().autotap = false
+getgenv().autobuyegg = false
+getgenv().autorebirth = false
+getgenv().autoJumpUpgrade = false
+getgenv().autoGemUpgrade = false
+getgenv().autoMoreStorage = false
+
+--remotePath for easiness even toug i didnt use it :P
+remotePath = game:GetService("ReplicatedStorage").Events
+
+--functions -- autotap
+function doTap()
+	spawn(function()
+		while getgenv().autotap == true do
+			remotePath.Tap:InvokeServer()
+			wait()
+		end
+	end)
+end
+
+--function --autorebirth
+function autorebirth(rebirthAmount)
+	spawn(function()
+		while getgenv().autorebirth == true do
+			remotePath.Rebirth:FireServer(rebirthAmount)
+			wait()
+		end
+	end)
+end
+
+
+
+
+
+--Tp function
+function TPTO(placeCFrame)
+	local plyr = game.Players.LocalPlayer
+	if plyr.Character then
+		plyr.Character.HumanoidRootPart.CFrame = placeCFrame
+	end
+end	
+--tps to egg 
+function TPegg(eggType)
+	if game:GetService("Workspace").Shops:FindFirstChild(eggType) then
+		TPTO(game:GetService("Workspace").Shops[eggType].Part.CFrame)
+	end
+end
+--tps to machines upgrade and rebirthshop
+function TPother(othertype)
+	if game:GetService("Workspace").Proximity:FindFirstChild(othertype) then
+		TPTO(game:GetService("Workspace").Proximity[othertype].CFrame)
+	end
+end
+
+--main tab and section
+local tab = Window:NewTab("Main")
+local MainSection = tab:NewSection("Main")
+
+--Player tab and Local Player Section
+local tab = Window:NewTab("Player")
+local PlayerSection = tab:NewSection("Local Player")
+
+--Auto tab and Auto section
+local tab = Window:NewTab("Auto")
+local AutoSection = tab:NewSection("Auto")
+
+--Teleport tab and teleport section
+local tab = Window:NewTab("Teleports")
+local TeleportSection = tab:NewSection("Teleports")
+
+--Credit tab and credit section
+local tab = Window:NewTab("Credits")
+local CreditSection = tab:NewSection("Credits")
+
+
+--Keybind to toggle the UI 
+MainSection:NewKeybind("Toggles UI", "This Keybind Toggles UI Default is RightAlt", Enum.KeyCode.RightAlt, function()
+	Library:ToggleUI()
+end)
+
+--Simple Rejoin script from Exunys 
+MainSection:NewButton("Rejoin", "Rejoins your game", function()
+	game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+end)
+
+-- slider script to change walk speed -me
+PlayerSection:NewSlider("Walkspeed Slider", "Slider which changes your walkspeed",500, 16, function(v)
+	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
+end)
+
+--button to reset walkspeed
+PlayerSection:NewButton("RESET WALKSPEED", "resets walkspeed", function()
+	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+end)
+
+--toggle to autotap recommended with autorebirth
+AutoSection:NewToggle("AutoTap recommended with AutoRebirth", "autotaps",function(bool)
+	getgenv().autotap = bool
+	print("Autotap is :", bool)
+	if bool then
+		doTap()
+	end
+end)
+
+--dropdown how much rebirths to constantly rebirth with recommended with autotap
+local SelectedRebirth
+AutoSection:NewDropdown("Amount rebirth you want to autorebirth with", "autorebirths",{"1", "5", "10", "20", "100", "500", "2000"},function(value)
+	SelectedRebirth = value
+end)
+
+--toggle to autorebirth
+AutoSection:NewToggle("AutoRebirth recommended with Autotap", "autorebirths",function(bool)
+	getgenv().autorebirth = bool
+	if bool then
+		autorebirth(SelectedRebirth)
+	end
+end)
+
+
+--dropdown to choose where to teleport
+local SelectedEgg
+TeleportSection:NewDropdown("EggTeleports (click on button under to tp)", "Teleports to egg", {"Forest Egg", "Flower Egg Robux", "Swamp Egg", "Snow Egg","Desert Egg","Death Egg","Beach Egg", "Mine Egg", "Cloud Egg", "Dominus Egg"}, function(value)
+    SelectedEgg = value
+	print(Value)
+end)
+
+--Teleports you to egg
+TeleportSection:NewButton("Click here to teleport to your destination ", "Selected teleport from above",function()
+	if SelectedEgg then
+		TPegg(SelectedEgg)
+	end
+end)
+
+--dropdown machine and uprgades
+local SelectedOther
+TeleportSection:NewDropdown("Machine Teleports DOESNT WORK IF TO FAR", "", {"RainbowMachine", "ShinyMachine","Upgrades", "RebirthShop"},function(value)
+	SelectedOther = value
+	print("You chose", value, "tping now")
+end)
+
+--Button to teleport to chosen destination
+TeleportSection:NewButton("Click here to teleport to your destination", "Teleport Button to selected destination above", function()
+	TPother(SelectedOther)
+end)
+
+--Credit section to honor my self and wYn#0001 void-scripts
+CreditSection:NewLabel("-Dev freezeboi(roblox) stonk4(github) (same guy)")
+
+--Credit section to honor wYn#0001 void-scripts
+CreditSection:NewLabel("-Tutorials from wYn#0001 void-scripts (HOT!)")
+
+
