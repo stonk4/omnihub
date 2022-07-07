@@ -1,3 +1,6 @@
+-- script for anyone --> loadstring(game:HttpGet("https://pastebin.com/raw/4Bh7PpLF", true))()
+
+
 --Library kavo ui from xHeptc(Hot)
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 --name and theme of my ui + creation of my ui
