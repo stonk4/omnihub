@@ -74,13 +74,13 @@ local tab = Window:NewTab("Tapping Simulator")
 local TSSection = tab:NewSection("Tapping simulator script made by me")
 
 TSSection:NewButton("Tapping simulator script", "Made by me ", function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+	loadstring(game:HttpGet("https://pastebin.com/raw/4Bh7PpLF", true))()
 end)
 
 local tab = Window:NewTab("Legends of speed")
 local LosSection = tab:NewSection("legends of speed script made by me")
 
-local LosSection:Newbutton("Legends of speed script ", "made by me myself and i", function()
+local LosSection:NewButton("Legends of speed script ", "made by me myself and i", function()
 	loadstring(game:HttpGet("https://pastebin.com/raw/zh8P7d4x", true))()
 end)
 
