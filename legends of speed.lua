@@ -1,4 +1,7 @@
---xHeptc ui kavo ui lib very sexy lib 
+-- script for anyone -->  loadstring(game:HttpGet("https://pastebin.com/raw/zh8P7d4x", true))()
+
+
+--xHeptc ui kavo ui lib very sexy lib
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 
 -- Legends of speed when Peasants of power walk in
