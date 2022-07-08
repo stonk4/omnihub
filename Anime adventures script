@@ -1,0 +1,357 @@
+
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "OmniHub | Anime Adventures", HidePremium = false,IntroText = "OmniHub | Anime Adventures", SaveConfig = false, ConfigFolder = "OrionTest"})
+
+--getgenv().
+getgenv().autoEgg = false
+
+--main tab
+local Tab = Window:MakeTab({
+	Name = "Main",
+	PremiumOnly = false
+})
+
+--main section
+local Section = Tab:AddSection({
+	Name = "Main"
+})
+
+--player tab 
+local Tab2 = Window:MakeTab({
+	Name = "Player",
+	PremiumOnly = false
+})
+
+-- player section
+local Section2 = Tab2:AddSection({
+	Name = "Player"
+})
+
+--misc tab
+local Tab3 = Window:MakeTab({
+	Name = "Misc",
+	PremiumOnly = false
+})
+
+--Miscellaneous  section
+local Section2 = Tab3:AddSection({
+	Name = "Miscellaneous"
+})
+
+--Teleport Tab
+local Tab4 = Window:MakeTab({
+	Name = "Teleports",
+	PremiumOnly = false
+})
+
+--Teleport section
+local Section2 = Tab4:AddSection({
+	Name = "Teleports"
+})
+
+--auto farm tab
+local  Tab5 = Window:MakeTab({
+    Name = "Auto"
+})
+-- auto farm section
+local Section2 = Tab5:AddSection({
+	Name = "Auto"
+})
+
+--credit tab
+local  Tab6 = Window:MakeTab({
+    Name = "Credits"
+})
+-- credit section
+local Section2 = Tab6:AddSection({
+	Name = "Credits"
+})
+
+
+
+function AutoBuyegg()
+    spawn(function()
+        while wait() do
+            if not getgenv().autoEgg then break end
+                local args = {
+                    [1] = "dbz_fighter",
+                    [2] = "gems"}
+                game:GetService("ReplicatedStorage").endpoints.client_to_server.buy_random_fighter:InvokeServer(unpack(args))
+                wait()
+            end
+        end
+    )
+end
+
+
+--Tp function
+function TPTO(placeCFrame)
+	local plyr = game.Players.LocalPlayer
+	if plyr.Character then
+		plyr.Character.HumanoidRootPart.CFrame = placeCFrame
+	end
+end
+
+--getclosest function
+local function getClosest()
+    local dist, thing = math.huge
+    for i, v in next, game:GetService("Workspace")["_UNITS"]:GetChildren() do
+        if v:IsA("Model") and v.Name == unit then
+            local mag =
+                (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).magnitude
+            if mag < dist then
+                dist = mag
+                thing = v
+            end
+        end
+    end
+    return thing
+end
+
+
+--local unit 
+local Unit = {}
+
+for i, v in next, game:GetService("Workspace")["_UNITS"]:GetChildren() do
+    if v:IsA("Model") and v._stats.player.Value == game.Players.LocalPlayer then
+        if not table.find(Unit, tostring(v)) then
+            table.insert(Unit, tostring(v))
+        end
+    end
+end
+
+
+
+-- rejoin button
+Tab:AddButton({
+	Name = "Rejoin",
+	Callback = function()
+        game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+  	end
+})
+
+
+
+
+
+--walkspeed slider
+local walkspeedSlider = Tab2:AddSlider({
+	Name = " Walkspeed Slider",
+	Min = 16,
+	Max = 500,
+	Default = 16,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "Walkspeed",
+	Callback = function(v)
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
+	end
+})
+
+--resets walkspeed
+Tab2:AddButton({
+	Name = "Reset Walkspeed",
+	Callback = function()
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+  	end
+})
+
+--local selectedcode will be used later
+local selectedcode
+
+--Textbox to input code
+Tab3:AddTextbox({
+	Name = "Input code here ---->",
+	Default = "",
+	TextDisappear = false,
+	Callback = function(txt)
+		selectedcode = txt;
+	end
+})
+
+
+-- button to enter coe into server checks if it is a code or not
+Tab3:AddButton({
+	Name = "click here to redeem code (if right)",
+	Callback = function()
+        game:GetService("ReplicatedStorage").endpoints.client_to_server.redeem_code:InvokeServer(selectedcode)
+  	end
+})
+
+--teleports you to challenges
+Tab4:AddButton({
+	Name = "Teleport to Challenges",
+	Callback = function()
+        TPTO(game:GetService("Workspace")._CHALLENGES._bounds.CFrame)
+  	end
+})
+
+--teleports you to play section
+Tab4:AddButton({
+	Name = "Teleport to PLAY section",
+	Callback = function()
+        TPTO(game:GetService("Workspace")._LOBBIES.Barrier.CFrame)
+  	end
+})
+
+--Teleport to Time machine
+Tab4:AddButton({
+	Name = "Teleport to Time Machine",
+	Callback = function()
+        TPTO(game:GetService("Workspace")._LOBBIES.front["time machine"].floor.CFrame)
+  	end
+})
+
+-- tp to travelling merchant
+Tab4:AddButton({
+	Name = "Teleport to Travelling Merchant",
+	Callback = function()
+        TPTO(game:GetService("Workspace").travelling_merchant.stand.Part.CFrame)
+  	end
+})
+
+--teleporrt ot leader boards yes ik i spelled teleport wrong
+Tab4:AddButton({
+	Name = "Teleport to EVOLVE",
+	Callback = function()
+        TPTO(game:GetService("Workspace")._EVOLVE.Barrier.CFrame)
+  	end
+})
+
+--teleport to leaderboards
+Tab4:AddButton({
+	Name = "Teleport to TRAITS",
+	Callback = function()
+        TPTO(game:GetService("Workspace")._npcs.whis.Head.CFrame)
+  	end
+})
+
+--teleport to leaderboards
+Tab4:AddButton({
+	Name = "Teleport to LEADERBOARDS",
+	Callback = function()
+        TPTO(game:GetService("Workspace")._LEADERBOARDS_.sign['1'].CFrame)
+  	end
+})
+
+-- teleport to summons
+Tab4:AddButton({
+	Name = "Teleport to SUMMONS shop",
+	Callback = function()
+        TPTO(game:GetService("Workspace")._shop._banners.banner.screen.CFrame)
+  	end
+})
+
+--to excanor exclusive shop
+Tab4:AddButton({
+    Name = "Teleport to EXCLUSIVE shop",
+    Callback = function()
+        TPTO(game:GetService("Workspace")._npcs.escanor.Head.CFrame)
+    end
+})
+
+
+-- tp to RAID not open yet when writing code lol
+Tab4:AddButton({
+	Name = "Teleport to RAIDS",
+	Callback = function()
+        TPTO(game:GetService("Workspace")._RAID.stairs.Model.Part.CFrame)
+  	end
+})
+
+
+
+
+
+--tap button what else
+Tab5:AddToggle({
+	Name = "Auto Upgrade Nearest Units",
+	Callback = function(Value)
+        autoup = Value
+        while autoup do task.wait()
+            local args = {
+                [1] = getClosest()
+            }
+            
+            game:GetService("ReplicatedStorage").endpoints.client_to_server.upgrade_unit_ingame:InvokeServer(unpack(args))
+        end
+    end,
+    Enabled = false
+})
+
+--button to refresh units
+Tab5:AddButton({
+    Name = "Refresh units",
+        Callback = function()
+            table.clear(Unit)
+            for i, v in next, game:GetService("Workspace")["_UNITS"]:GetChildren() do
+                if v:IsA("Model") and v._stats.player.Value == game.Players.LocalPlayer then
+                    if not table.find(Unit, tostring(v)) then
+                        table.insert(Unit, tostring(v))
+                        drop:SetOptions(Unit)
+                    end
+                end
+            end
+        end
+
+
+
+
+})
+
+--toggle to auto buy stars
+Tab5:AddToggle({
+    Name = "Auto Buy stars",
+    Default = false,
+    Callback = function(bool)
+        getgenv().autoEgg = bool
+        if bool then
+            AutoBuyegg()
+        end
+    end
+})
+
+--toggle to auto ability full credit to KeyBrew
+Tab5:AddToggle({
+    Name = "Auto Ability",
+    Default = false,
+    Callback = function(Value)
+        autoabi = Value    
+        while autoabi do task.wait()
+            pcall(function()
+                    for i, v in next, game:GetService("Workspace")["_UNITS"]:GetChildren() do
+                        if v:IsA("Model") and v._stats.player.Value == game.Players.LocalPlayer then
+                        local args = {
+                            [1] = v
+                        }
+    
+                        game:GetService("ReplicatedStorage").endpoints.client_to_server.use_active_attack:InvokeServer(unpack(args))
+                    end
+                end
+            end)
+        end
+    end,
+    Enabled = false
+})
+    
+
+Tab5:AddDropdown({
+	Name = "Select unit",
+	Callback = function(Value)
+		getgenv().unit = Value
+	end, 
+    Options = Unit  
+})
+
+--Me the guy you kno
+Tab6:AddLabel("Developer of OmniHub | Anime Adventures github:stonk4")    
+
+--i know i typed know wrong above
+Tab6:AddLabel("Orion hub - shlexware")
+
+--some more credits
+Tab6:AddLabel("Auto Ability and Auto upgrade near units - Keybrew")
+
+--credits cus im cool
+Tab6:AddLabel("Add units, refresh units - also KeyBrew")
+OrionLib:Init()
