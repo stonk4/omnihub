@@ -27,7 +27,7 @@ local Section2 = Tab2:AddSection({
 	Name = "Player"
 })
 
---misc tab
+--miscc tab
 local Tab3 = Window:MakeTab({
 	Name = "Misc",
 	PremiumOnly = false
