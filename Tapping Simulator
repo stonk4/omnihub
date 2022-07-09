@@ -21,7 +21,7 @@ remotePath = game:GetService("ReplicatedStorage").Events
 function doTap()
 	spawn(function()
 		while getgenv().autotap == true do
-			remotePath.Tap:InvokeServer()
+			remotePath.Tap:FireServer()
 			wait()
 		end
 	end)
